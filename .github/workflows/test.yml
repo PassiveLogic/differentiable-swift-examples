@@ -1,0 +1,22 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+      
+jobs:
+  mac:
+    name: test-ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: install swift
+        uses: slashmo/install-swift@v0.4.0
+        with:
+          version: swift-DEVELOPMENT-SNAPSHOT-2023-11-20-a
+      - name: run
+        run: swift build
