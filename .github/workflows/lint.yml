@@ -1,0 +1,20 @@
+name: lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+      
+jobs:
+  mac:
+    name: lint-macOS
+    runs-on: macOS-13
+    steps:
+      - uses: actions/checkout@v3
+      - name: install
+        run: brew install swift-format
+      - name: run
+        run: swift-format lint --recursive --parallel --strict --configuration .swift-format.json Package.swift Sources
