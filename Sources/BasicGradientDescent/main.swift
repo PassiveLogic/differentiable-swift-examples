@@ -10,14 +10,14 @@ struct Perceptron: Differentiable {
 
     @differentiable(reverse)
     func callAsFunction(_ x1: Float, _ x2: Float) -> Float {
-		// Determine the weighted contribution from each input, plus bias.
+        // Determine the weighted contribution from each input, plus bias.
         let output = (weight1 * x1) + (weight2 * x2) + bias
-		// Apply a nonlinear activation function to the output.
-		if output >= 0.0 {
-			return output
-		} else {
-			return 0.1 * output
-		}
+        // Apply a nonlinear activation function to the output.
+        if output >= 0.0 {
+            return output
+        } else {
+            return 0.1 * output
+        }
     }
 }
 
@@ -70,4 +70,3 @@ print("Value at (1.0, 0.0): \(value1)")
 let value2 = model(1.0, 1.0)
 
 print("Value at (1.0, 1.0): \(value2)")
-

@@ -10,7 +10,7 @@ import _Differentiation
 
 @differentiable(reverse)
 func square(_ x: Float) -> Float {
-	return x * x
+    return x * x
 }
 
 // Note that an inout value takes the place of both parameter and result, and a mutating function
@@ -18,12 +18,12 @@ func square(_ x: Float) -> Float {
 
 @differentiable(reverse)
 func squared(_ x: inout Float) {
-	x = x * x
+    x = x * x
 }
 
 // To declare a type as being differentiable, it needs to conform to the Differentiable protocol.
 // Generally, types are differentiable if they are continuous or if all of their properties are
-// continuous and Differentiable. However, Differentiable types can have non-Differentiable 
+// continuous and Differentiable. However, Differentiable types can have non-Differentiable
 // properties, if those properties are annotated with @noDerivative. Those non-Differentiable
 // properties will then not participate in differentiation.
 //
@@ -31,10 +31,10 @@ func squared(_ x: inout Float) {
 // to be used in gradient descent they must be able to be moved by a tangent vector.
 
 struct MyValue: Differentiable {
-	var x: Float
-	var y: Double
-	@noDerivative
-	let isTracked: Bool
+    var x: Float
+    var y: Double
+    @noDerivative
+    let isTracked: Bool
 }
 
 // To activate the differentiation machinery, there are some special built-in functions in the

@@ -7,12 +7,12 @@ let package = Package(
     products: [
         .executable(name: "BasicDifferentiation", targets: ["BasicDifferentiation"]),
         .executable(name: "BasicGradientDescent", targets: ["BasicGradientDescent"]),
-        .executable(name: "CustomDerivatives", targets: ["CustomDerivatives"])
-	],    
-    dependencies: [
-        .package(url: "https://github.com/apple/swift-format.git", .upToNextMajor(from: "509.0.0")),
+        .executable(name: "CustomDerivatives", targets: ["CustomDerivatives"]),
     ],
-	targets: [
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-format.git", .upToNextMajor(from: "509.0.0"))
+    ],
+    targets: [
         .executableTarget(
             name: "BasicDifferentiation"
         ),
@@ -22,7 +22,5 @@ let package = Package(
         .executableTarget(
             name: "CustomDerivatives"
         ),
-	]
+    ]
 )
-
-
