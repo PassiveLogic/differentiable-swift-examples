@@ -7,6 +7,7 @@ let package = Package(
     products: [
         .executable(name: "BasicDifferentiation", targets: ["BasicDifferentiation"]),
         .executable(name: "BasicGradientDescent", targets: ["BasicGradientDescent"]),
+        .executable(name: "CustomDerivatives", targets: ["CustomDerivatives"]),
     ],
 	targets: [
         .executableTarget(name: "BasicDifferentiation"),
