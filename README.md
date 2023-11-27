@@ -45,9 +45,9 @@ The following examples are present in the repository, and can be built and run v
 swift run [example]
 ```
 
-- [BasicDifferentiation](BasicDifferentiation): A very simple example of using automatic differentation with a few different functions and types.
-- [CustomDerivatives](CustomDerivatives): Differentiable Swift lets you register custom derivatives for functions, and this shows how to do so.
-- [BasicGradientDescent](BasicGradientDescent): How to perform gradient descent optimization in Swift.
+- [BasicDifferentiation](BasicDifferentiation/main.swift): A very simple example of using automatic differentation with a few different functions and types.
+- [CustomDerivatives](CustomDerivatives/main.swift): Differentiable Swift lets you register custom derivatives for functions, and this shows how to do so.
+- [BasicGradientDescent](BasicGradientDescent/main.swift): How to perform gradient descent optimization in Swift.
 
 
 ## Differentiable Swift resources
@@ -57,15 +57,15 @@ so some older documentation may provide great background on the feature but not 
 
 - [Differentiable programming for gradient-based machine learning](https://forums.swift.org/t/differentiable-programming-for-gradient-based-machine-learning/42147)
 - The Intro to Differentiable Swift series:
- - [Part 0: Why Automatic Differentiation is Awesome](https://medium.com/passivelogic/intro-to-differentiable-swift-part-0-why-automatic-differentiation-is-awesome-a522128ca9e3)
- - [Part 1: Gradient Descent](https://medium.com/passivelogic/intro-to-differentiable-swift-part-1-gradient-descent-181a06aaa596)
- - [Part 2: Differentiable Swift](https://medium.com/passivelogic/intro-to-differentiable-swift-part-2-differentiable-swift-25a99b97087f)
- - [Part 3: Differentiable API Introduction](https://medium.com/passivelogic/intro-to-differentiable-swift-part-3-differentiable-api-introduction-2d8d747e0ac8)
- - [Part 4: Differentiable Swift API Details](https://medium.com/passivelogic/intro-to-differentiable-swift-part-4-differentiable-swift-api-details-b6368c2dae5)
+  - [Part 0: Why Automatic Differentiation is Awesome](https://medium.com/passivelogic/intro-to-differentiable-swift-part-0-why-automatic-differentiation-is-awesome-a522128ca9e3)
+  - [Part 1: Gradient Descent](https://medium.com/passivelogic/intro-to-differentiable-swift-part-1-gradient-descent-181a06aaa596)
+  - [Part 2: Differentiable Swift](https://medium.com/passivelogic/intro-to-differentiable-swift-part-2-differentiable-swift-25a99b97087f)
+  - [Part 3: Differentiable API Introduction](https://medium.com/passivelogic/intro-to-differentiable-swift-part-3-differentiable-api-introduction-2d8d747e0ac8)
+  - [Part 4: Differentiable Swift API Details](https://medium.com/passivelogic/intro-to-differentiable-swift-part-4-differentiable-swift-api-details-b6368c2dae5)
 - [Differentiable Programming Manifesto](https://github.com/apple/swift/blob/main/docs/DifferentiableProgramming.md) (note: slightly out of date)
 - The Swift for TensorFlow project explored the use of differentiable Swift paired with machine learning frameworks:
- - [Overview of Swift for TensorFlow](https://www.tensorflow.org/swift/guide/overview)
- - [Main Swift for TensorFlow GitHub repository](https://github.com/tensorflow/swift)
- - [Swift for TensorFlow machine learning APIs](https://github.com/tensorflow/swift-apis)
- - [Machine learning models and libraries](https://github.com/tensorflow/swift-models)
+  - [Overview of Swift for TensorFlow](https://www.tensorflow.org/swift/guide/overview)
+  - [Main Swift for TensorFlow GitHub repository](https://github.com/tensorflow/swift)
+  - [Swift for TensorFlow machine learning APIs](https://github.com/tensorflow/swift-apis)
+  - [Machine learning models and libraries](https://github.com/tensorflow/swift-models)
  
