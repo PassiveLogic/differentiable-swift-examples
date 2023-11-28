@@ -9,9 +9,6 @@ let package = Package(
         .executable(name: "BasicGradientDescent", targets: ["BasicGradientDescent"]),
         .executable(name: "CustomDerivatives", targets: ["CustomDerivatives"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/apple/swift-format.git", .upToNextMajor(from: "509.0.0"))
-    ],
     targets: [
         .executableTarget(
             name: "BasicDifferentiation"
