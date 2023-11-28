@@ -1,5 +1,5 @@
-import _Differentiation
 import Foundation
+import _Differentiation
 
 // In addition to compiler-generated derivatives, you can register your own custom derivatives
 // for any function to make them differentiable. This is particularly useful for functions that
@@ -14,7 +14,7 @@ import Foundation
 // documentation: https://jax.readthedocs.io/en/latest/notebooks/autodiff_cookbook.html#vector-jacobian-products-vjps-aka-reverse-mode-autodiff )
 // The VJP takes as its input the original parameters to the main function and provides as output
 // a tuple containing the value produced by the original function and a pullback function. The
-// pullback has as its inputs the tangent vectors of each differentiable result and as its output 
+// pullback has as its inputs the tangent vectors of each differentiable result and as its output
 // the tangent vectors of each differentiable parameter. Note that for some types, like Double, the
 // type of the tangent vector is the same as the type of the base type.
 
@@ -32,7 +32,6 @@ public func sqrtVJP(_ value: Double) -> (value: Double, pullback: (Double) -> Do
 let (value, gradient) = valueWithGradient(at: 9.0, of: sqrt)
 print("The sqrt() value is \(value), and the gradient is \(gradient)")
 
-
 // Custom derivatives are also useful in cases where the function may not be continuous across
 // all values, and thus may not have a derivative at all points. We can then provide custom
 // derivatives that specify an approximation that we can use, such as in the case of `min()`:
@@ -48,8 +47,7 @@ public func minVJP<T: Comparable & Differentiable>(
     func pullback(_ tangentVector: T.TangentVector) -> (T.TangentVector, T.TangentVector) {
         if lhs <= rhs {
             return (tangentVector, .zero)
-        }
-        else {
+        } else {
             return (.zero, tangentVector)
         }
     }
@@ -58,4 +56,3 @@ public func minVJP<T: Comparable & Differentiable>(
 
 let (value2, gradient2) = valueWithGradient(at: 3.0, 4.0, of: min)
 print("The min() value is \(value2), and the gradient is \(gradient2)")
-

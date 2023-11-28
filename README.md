@@ -45,9 +45,9 @@ The following examples are present in the repository, and can be built and run v
 swift run [example]
 ```
 
-- [BasicDifferentiation](BasicDifferentiation/main.swift): A very simple example of using automatic differentation with a few different functions and types.
-- [CustomDerivatives](CustomDerivatives/main.swift): Differentiable Swift lets you register custom derivatives for functions, and this shows how to do so.
-- [BasicGradientDescent](BasicGradientDescent/main.swift): How to perform gradient descent optimization in Swift.
+- [BasicDifferentiation](Sources/BasicDifferentiation/main.swift): A very simple example of using automatic differentation with a few different functions and types.
+- [CustomDerivatives](Sources/CustomDerivatives/main.swift): Differentiable Swift lets you register custom derivatives for functions, and this shows how to do so.
+- [BasicGradientDescent](Sources/BasicGradientDescent/main.swift): How to perform gradient descent optimization in Swift.
 
 
 ## Differentiable Swift resources
