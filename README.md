@@ -53,6 +53,11 @@ swift run [example]
 - [BasicGradientDescent](Sources/BasicGradientDescent/main.swift): How to perform gradient descent optimization in Swift.
 
 
+## Benchmarks
+
+A motivating benchmark of a building thermal model, optimized via gradient descent, is implemented
+in several languages and frameworks to compare against differentiable Swift in the [Benchmarks](Benchmarks/) directory.
+
 ## Differentiable Swift resources
 
 If you want to learn more about differentiable Swift, there are a variety of resources out there. The API has changed over time,
