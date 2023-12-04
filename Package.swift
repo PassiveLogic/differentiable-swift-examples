@@ -11,12 +11,14 @@ let package = Package(
         .library(name: "DifferentiableSwiftExamples", targets: ["DifferentiableSwiftExamples"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0"),
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0")
     ],
     targets: [
         .executableTarget(name: "BasicDifferentiation"),
         .executableTarget(name: "BasicGradientDescent"),
         .executableTarget(name: "CustomDerivatives"),
-        .target(name: "DifferentiableSwiftExamples", path: "Sources/DifferentiableSwiftExamplesDocumentation"),
-	]
+        .target(
+            name: "DifferentiableSwiftExamples",
+            path: "Sources/DifferentiableSwiftExamplesDocumentation"),
+    ]
 )
