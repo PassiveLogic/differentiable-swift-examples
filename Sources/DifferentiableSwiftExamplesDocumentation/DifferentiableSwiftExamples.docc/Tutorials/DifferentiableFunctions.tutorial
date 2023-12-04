@@ -1,0 +1,54 @@
+@Tutorial(time: 5) {
+    @Intro(title: "Basic Differentiation") {
+        # First tutorial Skeleton, more coming soon
+    }
+    
+    @Section(title: "Marking functions as differentiable") {
+        @ContentAndMedia {
+            How to mark functions as differentiable and get their derivative and/or gradient.
+        }
+        
+        @Steps {            
+            @Step {
+                Start by importing the `_Differentiation` module.
+                @Code(name: "main.swift", file: "01.swift")
+            }
+            
+            @Step {
+                Then create a function that we want to make differentiable. 
+                In this case we'll go for a simple function that takes an input and squares it. 
+                
+                @Code(name: "main.swift", file: "02.swift")
+            }
+            
+            @Step {
+                Mark the function with `@differentiable(reverse)`
+                @Code(name: "main.swift", file: "03.swift")
+            }
+            
+            Note that all inputs and outputs of a function marked with `@differentiable` should conform to the `Differentiable` protocol. Luckily floating point numbers like `Float` and `Double` already conform to this protocol by default.
+            
+            # More Coming Soon
+        }
+    }
+    
+    @Section(title: "Writing custom derivatives") {
+        @ContentAndMedia {
+            How to mark functions as differentiable and get their derivative and/or gradient.
+        }
+        
+        @Steps {
+            # Coming Soon
+        }
+    }
+        
+    @Section(title: "Make 3rd party functions `Differentiable`") {
+        @ContentAndMedia {
+            How to mark functions as differentiable and get their derivative and/or gradient.
+        }
+        
+        @Steps {
+            # Coming Soon
+        }
+    }
+}
