@@ -23,7 +23,7 @@ jobs:
       - name: build docs
         run: swift package --allow-writing-to-directory docs generate-documentation --target DifferentiableSwiftExamples --transform-for-static-hosting --hosting-base-path differentiable-swift-examples --output-path docs
       - name: update index
-        run: echo '<script>window.location.href += "/documentation/docc_test"</script>' > docs/index.html
+        run: echo '<script>window.location.href += "documentation/differentiableswiftexamples"</script>' > docs/index.html
       - name: setup pages
         id: pages
         uses: actions/configure-pages@v3

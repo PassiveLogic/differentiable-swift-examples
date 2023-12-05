@@ -16,6 +16,9 @@ The goal of this repository is to provide examples and documentation for differe
 used and to show the power of automatic differentiation in various applications. We hope to grow this over time with new
 examples and documentation, and welcome contributions to that end.
 
+## Documentation
+Docc generated documentation can be found at https://passivelogic.github.io/differentiable-swift-examples
+
 ## Getting started
 
 Differentiable Swift is present as an experimental feature in modern Swift toolchains. Due to the rapid speed at which it
