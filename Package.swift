@@ -19,6 +19,7 @@ let package = Package(
         .executableTarget(name: "CustomDerivatives"),
         .target(
             name: "DifferentiableSwiftExamples",
-            path: "Sources/DifferentiableSwiftExamplesDocumentation"),
+            path: "Sources/DifferentiableSwiftExamplesDocumentation"
+        ),
     ]
 )

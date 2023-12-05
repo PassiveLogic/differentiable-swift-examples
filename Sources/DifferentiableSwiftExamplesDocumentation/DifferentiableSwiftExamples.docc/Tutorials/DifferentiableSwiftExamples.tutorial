@@ -4,8 +4,8 @@
     }
     
     @Chapter(name: "Setup") {
-        How to setup your machine to start using autodiff.
-        @TutorialReference(tutorial: "doc:Setup")
+        How to setup your machine to start using differentiable Swift.
+        @TutorialReference(tutorial: "doc:MachineSetup")
     }
     
     @Chapter(name: "Differentiable Functions") {
