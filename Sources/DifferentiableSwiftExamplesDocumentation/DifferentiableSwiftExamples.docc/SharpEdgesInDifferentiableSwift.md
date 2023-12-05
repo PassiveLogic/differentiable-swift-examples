@@ -4,11 +4,7 @@ This is an overview of some of the currently missing capabilities in differentia
 
 ## Overview
 
-This is an overview of some of the currently missing capabilities in differentiable Swift you may encounter when working with the feature. Inspired by the original 
- 
- ### other thing 
-
-[Swift for TensorFlow notebook](https://www.tensorflow.org/swift/tutorials/Swift_autodiff_sharp_edges), we intend for this to be an up-to-date and comprehensive list of common issues you may encounter when working with differentiable Swift.
+This is an overview of some of the currently missing capabilities in differentiable Swift you may encounter when working with the feature. Inspired by the original [Swift for TensorFlow notebook](https://www.tensorflow.org/swift/tutorials/Swift_autodiff_sharp_edges), we intend for this to be an up-to-date and comprehensive list of common issues you may encounter when working with differentiable Swift.
 
 - Forward mode differentiation (`@differentiable(forward)` JVPs) is only partially implemented.
 - Differentiation through `_modify` subscript accessors (like array subscript setters) isn't supported yet.
