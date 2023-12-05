@@ -3,13 +3,7 @@
         # Coming Soon
     }
     
-    @Section(title: "<#text#>") {
-        @ContentAndMedia {
-            
-        }
+    @Section(title: "Coming Soon") {
         
-        @Steps {
-            
-        }
     }
 }
