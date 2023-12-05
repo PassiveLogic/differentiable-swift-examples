@@ -1,0 +1,15 @@
+@Tutorial(time: 20) {
+    @Intro(title: "Gradient Descent") {
+        # Coming Soon
+    }
+    
+    @Section(title: "<#text#>") {
+        @ContentAndMedia {
+            <#text#>
+        }
+        
+        @Steps {
+        
+        }
+    }
+}

@@ -1,0 +1,39 @@
+name: docc
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  pages: write
+  id-token: write
+  contents: read
+
+jobs:
+  docc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: install swift
+        uses: slashmo/install-swift@v0.4.0
+        with:
+          version: swift-DEVELOPMENT-SNAPSHOT-2023-11-20-a
+      - name: build docs
+        run: swift package --allow-writing-to-directory docs generate-documentation --target DifferentiableSwiftExamples --transform-for-static-hosting --hosting-base-path differentiable-swift-examples --output-path docs
+      - name: update index
+        run: echo '<script>window.location.href += "/documentation/docc_test"</script>' > docs/index.html
+      - name: setup pages
+        id: pages
+        uses: actions/configure-pages@v3
+      - name: upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs
+      - name: deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
