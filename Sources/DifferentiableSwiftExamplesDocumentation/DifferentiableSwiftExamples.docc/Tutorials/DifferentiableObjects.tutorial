@@ -1,9 +1,35 @@
 @Tutorial(time: 5) {
     @Intro(title: "Differentiable Objects") {
-        # Coming Soon
+        # First tutorial Skeleton, more coming soon
     }
     
-    @Section(title: "Coming Soon") {
+    @Section(title: "Marking objects as `Differentiable`") {
+        @ContentAndMedia {
+            How to mark objects as `Differentiable` and use them as arguments to `@differentiable` functions
+        }
         
+        @Steps {            
+            # More Coming Soon
+        }
+    }
+    
+    @Section(title: "Writing custom `TangentVector`s") {
+        @ContentAndMedia {
+            How to write custom `TangentVector`s to make your types differentiable
+        }
+        
+        @Steps {
+            # Coming Soon
+        }
+    }
+        
+    @Section(title: "Make 3rd party objects `Differentiable`") {
+        @ContentAndMedia {
+            How to extend 34d party objects to make them `Differentiable`.
+        }
+        
+        @Steps {
+            # Coming Soon
+        }
     }
 }
