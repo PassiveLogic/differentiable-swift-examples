@@ -42,7 +42,7 @@
         }
     }
         
-    @Section(title: "Make 3rd party functions `Differentiable`") {
+    @Section(title: "Make 3rd party functions differentiable") {
         @ContentAndMedia {
             How to mark functions as differentiable and get their derivative and/or gradient.
         }
