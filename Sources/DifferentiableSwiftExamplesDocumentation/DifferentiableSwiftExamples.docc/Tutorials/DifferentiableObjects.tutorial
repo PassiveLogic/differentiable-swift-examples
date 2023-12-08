@@ -1,6 +1,7 @@
 @Tutorial(time: 5) {
     @Intro(title: "Differentiable Objects") {
-        # First tutorial Skeleton, more coming soon
+        `@differentiable` functions require that their arguments and results conform to the `Differentiable` protocol. Some of the standard library types such as `Float`, `Double`, `Array.DifferentiableView` already conform to this protocol. 
+        In this tutorial we will go into writing our own `Differentiable` types in order to write more complex `@differentiable` functions.
     }
     
     @Section(title: "Marking objects as `Differentiable`") {
@@ -8,7 +9,7 @@
             How to mark objects as `Differentiable` and use them as arguments to `@differentiable` functions
         }
         
-        @Steps {            
+        @Steps {
             # More Coming Soon
         }
     }
