@@ -53,7 +53,7 @@ swift run [example]
 ## Benchmarks
 
 A motivating benchmark of a building thermal model, optimized via gradient descent, is implemented
-in several languages and frameworks to compare against differentiable Swift in the [Benchmarks](Benchmarks/) directory.
+in several languages and frameworks to compare against differentiable Swift in the [Benchmarks/BuildingSimulation](Benchmarks/BuildingSimulation/) directory.
 
 ## Differentiable Swift resources
 
