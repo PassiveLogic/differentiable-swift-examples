@@ -78,7 +78,7 @@ source tensorflow-cpu/bin/activate
 pip install tensorflow
 ```
 
-and then run the benchmark by going to the `PyTorch` subdirectory here and using:
+and then run the benchmark by going to the `TensorFlow` subdirectory here and using:
 
 ```bash
 python3 TensorFlowSimulator.py

@@ -190,12 +190,12 @@ for i in range(trials):
 
     gradientTime = measure(getGradient, simParams)
     
-    if i > warmup:
+    if i >= warmup:
         totalForwardTime += forwardOnly
         totalGradientTime += gradientTime
 
 
-averageForwardTime = totalForwardTime / trials
-averageGradientTime = totalGradientTime / trials
+averageForwardTime = totalForwardTime / (trials - warmup)
+averageGradientTime = totalGradientTime / (trials - warmup)
 print("trials:", trials)
 print("average forward and backwards pass (gradient) time", averageGradientTime)
