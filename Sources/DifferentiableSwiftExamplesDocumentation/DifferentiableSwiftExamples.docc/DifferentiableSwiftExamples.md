@@ -1,4 +1,8 @@
-# Differentiable Swift examples
+# ``DifferentiableSwiftExamples``
+
+@Metadata {
+    @DisplayName("Differentiable Swift examples")
+}
 
 Articles and tutorials on the experimental language feature of differentiable Swift.
 
