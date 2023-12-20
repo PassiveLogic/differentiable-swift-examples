@@ -6,17 +6,12 @@ This is an overview of some of the currently missing capabilities in differentia
 
 This is an overview of some of the currently missing capabilities in differentiable Swift you may encounter when working with the feature. Inspired by the original [Swift for TensorFlow notebook](https://www.tensorflow.org/swift/tutorials/Swift_autodiff_sharp_edges), we intend for this to be an up-to-date and comprehensive list of common issues you may encounter when working with differentiable Swift.
 
-- Forward mode differentiation (`@differentiable(forward)` JVPs) is only partially implemented.
-- `for..in` loops currently require you to loop over indices and using `withoutDerivative(at:)` on the collection you're looping over.
-- `map()` and `reduce()` cannot be differentiated through directly, instead there are special functions for `differentiableMap()` and `differentiableReduce()`.
-- Differentiation through `_modify` subscript accessors (like array subscript setters) isn't supported yet.
-- Differentiation through `@_alwaysEmitIntoClient` tagged functions isn’t yet supported. The most common cases of these are in SIMD functions, like `.sum()`.
-- No support yet in the standard library for Dictionary differentiation.
-- FloatingPoint type conversions are not differentiable out of the box. Workarounds are available however.
-- No support yet for differentiable keypath subscripting (get or set) but workarounds are available.
-
-
-## Examples
+- <doc:SharpEdgesInDifferentiableSwift#Loops>
+- <doc:SharpEdgesInDifferentiableSwift#Map-and-Reduce>
+- <doc:SharpEdgesInDifferentiableSwift#Array-subscript-setters>
+- <doc:SharpEdgesInDifferentiableSwift#Floating-point-type-conversions>
+- <doc:SharpEdgesInDifferentiableSwift#Keypath-subscripting>
+- <doc:SharpEdgesInDifferentiableSwift#Other>
 
 ### Loops
 Loops over collections of `Differentiable` objects unfortunately aren't differentiable yet. So as of yet the compiler cannot determine the derivative of the following function: 
@@ -58,8 +53,8 @@ let aPlusOne = a.differentiableMap { $0 + 1.0 } // [2.0, 3.0, 4.0]
 let aSum = a.differentiableReduce { 0, + } // 6.0
 ```
 
-### Array subscript setters (`_modify` subscript accessors)
-Currently the subcript setters on arrays (`array[0] = 1.0`) are not differentiable. Under the hood this is due to `_modify` subscript accessors not supporting differentiability yet (This feature is hopefully landing in Swift 5.10)
+### Array subscript setters
+Currently the subcript setters on arrays (`array[0] = 1.0`) are not differentiable. Under the hood this is due to `_modify` subscript accessors not supporting differentiability yet. (Work is ongoing, and this feature should land in Swift soon.)
 We can currently get around this however by extending the `Array` type with a mutating `update(at:with:)` function
 ```swift
 extension Array where Element: Differentiable {
@@ -96,7 +91,7 @@ We can now write:
 b.update(at: 0, with: 17.0)
 ```
 
-### Floating type conversions
+### Floating point type conversions
 
 If you're converting between `FloatingPointNumber`s types such as `Float` and `Double` be aware that their constructors currently aren't differentiable. This can be remedied by using a permutation of the following extension on the floating types you need:
 ```swift
@@ -146,3 +141,9 @@ extension Differentiable {
     }
 }
 ```
+
+### Other
+
+- Forward mode differentiation (`@differentiable(forward)` JVPs) is only partially implemented.
+- Differentiation through `@_alwaysEmitIntoClient` tagged functions isn’t yet supported. The most common cases of these are in SIMD functions, like `.sum()`.
+- No support yet in the standard library for Dictionary differentiation.
