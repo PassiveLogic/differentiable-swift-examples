@@ -1,9 +1,9 @@
-@Tutorial(time: 5) {
-    @Intro(title: "Setup") {
-        # Coming Soon
+@Tutorial(time: 15) {
+    @Intro(title: "Installing a toolchain for differentiable Swift") {
+        Differentiable Swift is an experimental language feature, and isn't currently enabled by default in the Swift toolchains that ship with Xcode. To work with it on macOS, Linux, or other platforms, a small amount of setup is needed.
     }
     
-    @Section(title: "Coming Soon") {
+    @Section(title: "Downloading a Swift toolchain for your plaform") {
         
     }
 }

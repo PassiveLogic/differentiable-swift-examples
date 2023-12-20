@@ -1,6 +1,8 @@
-@Tutorial(time: 20) {
-    @Intro(title: "Gradient Descent") {
-        # Coming Soon
+@Tutorial(time: 10) {
+    @Intro(title: "Gradient descent") {
+        Gradient descent optimization is a powerful technique for optimizing arbitrary parameters in a complex system to arrive at a desired result.
+        
+        This tutorial will demonstrate the use of gradient descent to train a perceptron to perform a boolean logic function.
     }
     
     @Section(title: "Coming Soon") {

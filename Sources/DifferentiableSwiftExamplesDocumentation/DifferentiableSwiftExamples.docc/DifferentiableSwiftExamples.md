@@ -22,4 +22,5 @@ TODO: A good introduction story here soon.
 - <doc:SharpEdgesInDifferentiableSwift>
 
 ### Tutorials
-- <doc:/tutorials/DifferentiableSwiftExamples>
+
+- <doc:/tutorials/UsingDifferentiableSwift>

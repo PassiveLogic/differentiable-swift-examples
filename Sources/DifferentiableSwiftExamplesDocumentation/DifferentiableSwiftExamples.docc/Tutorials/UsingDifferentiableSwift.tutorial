@@ -1,0 +1,21 @@
+@Tutorials(name: "Differentiable Swift") {
+    @Intro(title: "Using differentiable Swift") {
+        A collection of tutorials on the use of the differentiable Swift language feature.
+    }
+    
+    @Chapter(name: "Setup") {
+        How to set up your machine to start using differentiable Swift.
+        @TutorialReference(tutorial: "doc:MachineSetup")
+    }
+
+    @Chapter(name: "Differentiable functions and types") {
+        How to work with differentiable functions and types.
+        @TutorialReference(tutorial: "doc:DifferentiableFunctions")
+        @TutorialReference(tutorial: "doc:DifferentiableTypes")
+    }
+
+    @Chapter(name: "Gradient descent optimization") {
+        A simple example of how to harness the power of gradient descent optimization via differentiable Swift.
+        @TutorialReference(tutorial: "doc:GradientDescent")
+    }
+}

@@ -1,0 +1,62 @@
+@Tutorial(time: 5) {
+    @Intro(title: "Differentiable types") {
+        `@differentiable` functions require that their arguments and results conform to the `Differentiable` protocol. Some of the standard library types such as `Float`, `Double`, and `Array` already conform to this protocol. 
+        
+        In this tutorial we will go into writing our own `Differentiable` types for use with more complex `@differentiable` functions.
+    }
+    
+    @Section(title: "Conforming types to `Differentiable`") {
+        @ContentAndMedia {
+            Conform custom types to `Differentiable`,  and use them as arguments to `@differentiable` functions.
+            
+            Differentiable functions must have at least one argument and one result each that conform to the `Differentiable`. Many continuous types present in the standard library, like `Float` or `Double`, conform to `Differentiable`. For you to use your own custom types as active arguments or results in differentiable functions, they must conform to `Differentiable`.
+        }
+        
+        @Steps {
+            @Step {
+                Differentiable Swift is an experimental language feature. To enable it for a file, you must first import the `_Differentiation` module.
+                @Code(name: "main.swift", file: "DifferentiableTypes-01-01.swift")
+            }
+            
+            @Step {
+                Custom types that only contain other `Differentiable`-conforming members are easy to make `Differentiable` themselves.
+                @Code(name: "main.swift", file: "DifferentiableTypes-01-02.swift")
+            }
+
+            @Step {
+                To do so, simply add a `Differentiable` conformance when they are defined.
+                @Code(name: "main.swift", file: "DifferentiableTypes-01-03.swift")
+            }
+
+            @Step {
+                A custom type can have non-`Differentiable` members.
+                @Code(name: "main.swift", file: "DifferentiableTypes-01-04.swift")
+            }
+
+            @Step {
+                In that case, annotate those members with the `@noDerivative` attribute.
+                @Code(name: "main.swift", file: "DifferentiableTypes-01-05.swift")
+            }            
+        }
+    }
+    
+    @Section(title: "Writing custom `TangentVector`s") {
+        @ContentAndMedia {
+            Define custom `TangentVector` types.
+        }
+        
+        @Steps {
+            # Coming Soon
+        }
+    }
+        
+    @Section(title: "Make 3rd party types `Differentiable`") {
+        @ContentAndMedia {
+            Add `Differentiable` conformances to external types.
+        }
+        
+        @Steps {
+            # Coming Soon
+        }
+    }
+}
