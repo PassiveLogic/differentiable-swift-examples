@@ -23,7 +23,3 @@ TODO: A good introduction story here soon.
 
 ### Tutorials
 - <doc:/tutorials/DifferentiableSwiftExamples>
-- <doc:/tutorials/MachineSetup>
-- <doc:/tutorials/DifferentiableFunctions>
-- <doc:/tutorials/DifferentiableObjects>
-- <doc:/tutorials/GradientDescent>
