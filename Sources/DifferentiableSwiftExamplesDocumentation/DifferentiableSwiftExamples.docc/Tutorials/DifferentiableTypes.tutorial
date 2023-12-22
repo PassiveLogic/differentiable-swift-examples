@@ -1,4 +1,4 @@
-@Tutorial(time: 5) {
+@Tutorial(time: 15) {
     @Intro(title: "Differentiable types") {
         `@differentiable` functions require that their arguments and results conform to the `Differentiable` protocol. Some of the standard library types such as `Float`, `Double`, and `Array` already conform to this protocol. 
         
