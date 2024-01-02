@@ -5,7 +5,7 @@ more, utilizing physics-based digital twins. As a motivating use case for differ
 simple thermal model of a building was constructed and optimized via gradient descent in several
 languages and frameworks.
 
-Differentiable Swift prove to be the best of the available solutions, and that has driven
+Differentiable Swift proves to be the best of the available solutions, and that has driven
 PassiveLogic's investment in the language feature. This directory contains a representative benchmark
 for a thermal model of a building implemented in differentiable Swift,
 [PyTorch](https://pytorch.org), and [TensorFlow](https://www.tensorflow.org).
@@ -42,7 +42,7 @@ To build the benchmark, change into the `Swift` subdirectory and run the followi
 swiftc -O main.swift -o SwiftBenchmark
 ```
 
-and then run it via
+and then run it via:
 
 ```bash
 ./SwiftBenchmark 

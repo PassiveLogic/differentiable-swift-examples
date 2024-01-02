@@ -2,36 +2,36 @@
 
 Differentiable Swift is an experimental language feature for the [Swift language](https://www.swift.org) that is currently
 in the [pitch phase](https://forums.swift.org/t/differentiable-programming-for-gradient-based-machine-learning/42147) of
-the Swift Evolution process. The goal of this feature is to provide first-class language-integrated support for 
-differentiable programming, making Swift the first general-purpose, statically-typed programming language to have automatic
+the Swift Evolution process. The goal of this feature is to provide first-class, language-integrated support for 
+differentiable programming, making Swift the first general-purpose, statically typed programming language to have automatic
 differentiation built in. Originally developed as part of the
-[Swift for TensorFlow](https://www.tensorflow.org/swift/guide/overview) project, it is currently being worked on by teams
-at [PassiveLogic](https://passivelogic.com) and elsewhere.
+[Swift for TensorFlow](https://www.tensorflow.org/swift/guide/overview) project, teams
+at [PassiveLogic](https://passivelogic.com) and elsewhere are currently working on it.
 
-Differentiable Swift is purely a language feature, and isn't tied to any specific machine learning framework or platform.
+Differentiable Swift is purely a language feature and isn't tied to any specific machine learning framework or platform.
 It provides a means of building such frameworks in Swift, and works wherever Swift does: from Linux to macOS to
 [WebAssembly](https://swiftwasm.org).
 
 The goal of this repository is to provide examples and documentation for differentiable Swift, to illustrate how it can be
-used and to show the power of automatic differentiation in various applications. We hope to grow this over time with new
+used, and to show the power of automatic differentiation in various applications. We hope to grow this over time with new
 examples and documentation, and welcome contributions to that end.
 
 ## Documentation
-Docc generated documentation can be found at https://passivelogic.github.io/differentiable-swift-examples
+DocC-generated documentation can be found at https://passivelogic.github.io/differentiable-swift-examples
 
 ## Getting started
 
 Differentiable Swift is present as an experimental feature in modern Swift toolchains. Due to the rapid speed at which it
-is evolving, for best results we recommend using a Swift toolchain downloaded [from Swift.org](https://www.swift.org/download/)
+is evolving, for best results, we recommend using a Swift toolchain downloaded [from Swift.org](https://www.swift.org/download/)
 from either the Swift 5.9 development snapshots or the nightly development snapshots. The latter will more closely track
-the latest additions and fixes being upstreamed, but may be slightly less stable overall.
+the latest additions and fixes being upstreamed but may be slightly less stable overall.
 
 It is possible to use differentiable Swift with the default Swift toolchains that ship inside Xcode, however only the
 compiler additions are present in those toolchains. The standard library support needed to use the `_Differentiation` module
 is not provided in those toolchains and needs to be added after the fact. One example of how to do this can be found
 in [this project](https://github.com/philipturner/differentiation).
 
-No special compiler flags are needed to activate differentiable Swift, but you do need to place the following
+No special compiler flags are needed to activate differentiable Swift, but you do need to place the following:
 
 ```swift
 import _Differentiation
@@ -42,13 +42,13 @@ and try to use any differentiable Swift capabilities.
 
 ## Examples
 
-The following examples are present in the repository, and can be built and run via
+The following examples are present in the repository, and can be built and run via:
 
 ```bash
 swift run [example]
 ```
 
-- [BasicDifferentiation](Sources/BasicDifferentiation/main.swift): A very simple example of using automatic differentation with a few different functions and types.
+- [BasicDifferentiation](Sources/BasicDifferentiation/main.swift): A very simple example of using automatic differentiation with a few different functions and types.
 - [CustomDerivatives](Sources/CustomDerivatives/main.swift): Differentiable Swift lets you register custom derivatives for functions, and this shows how to do so.
 - [BasicGradientDescent](Sources/BasicGradientDescent/main.swift): How to perform gradient descent optimization in Swift.
 
