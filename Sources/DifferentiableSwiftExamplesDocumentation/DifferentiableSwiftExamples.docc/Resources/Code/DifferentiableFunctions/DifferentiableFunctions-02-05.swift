@@ -11,7 +11,7 @@ func vjpSquared(_ input: Double) -> (
 ) {
     let output = squared(value)
     func pullback(_ tangentVector: Double) -> Double {
-        return tangentVector * 2 * output)
+        return tangentVector * 2 * value
     }
     return (value: output, pullback: pullback)
 }

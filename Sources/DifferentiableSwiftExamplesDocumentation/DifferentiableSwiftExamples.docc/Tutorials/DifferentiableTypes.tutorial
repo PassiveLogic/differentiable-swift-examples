@@ -40,23 +40,32 @@
         }
     }
     
-    @Section(title: "Writing custom `TangentVector`s") {
+    @Section(title: "Defining custom tangent vectors for types") {
         @ContentAndMedia {
-            Define custom `TangentVector` types.
+            Define a custom tangent vector for a type.
+            
+            Every differentiable type has a `TangentVector` associated with it, which represents the rate of change of that type when used in a derivative.
+            The compiler normally synthesizes these tangent vectors for you on types conforming to `Differentiable`.
+            
+            However, there are situations in which you may want to define a custom tangent vector for a type.
+            For example, `Array` doesn't conform to `AdditiveArithmetic`, and therefore can't have a tangent vector automatically synthesized.
         }
         
         @Steps {
-            # Coming Soon
-        }
-    }
-        
-    @Section(title: "Make 3rd party types `Differentiable`") {
-        @ContentAndMedia {
-            Add `Differentiable` conformances to external types.
-        }
-        
-        @Steps {
-            # Coming Soon
+            @Step {
+                We begin with a simple differentiable type.
+                @Code(name: "main.swift", file: "DifferentiableTypes-02-01.swift")
+            }
+
+            @Step {
+                A custom tangent vector must either be a subtype named `TangentVector` or aliased to that name. It can contain a custom internal structure, but must conform to `AdditiveArithmetic` and `Differentiable`.
+                @Code(name: "main.swift", file: "DifferentiableTypes-02-02.swift")
+            }
+
+            @Step {
+                Finally, a `move(by:)` function must be defined that moves an instance of the base type by a small step along a direction. If the `TangentVector` you are stepping by is composed of other types' `TangentVector`s, you can use those existing `move(by:)` functions within this new one.
+                @Code(name: "main.swift", file: "DifferentiableTypes-02-03.swift")
+            }
         }
     }
 }

@@ -5,4 +5,4 @@ func squared(_ input: Double) -> Double {
 }
 
 @derivative(of: squared)
-func vjpSquared
+func vjpSquared()
