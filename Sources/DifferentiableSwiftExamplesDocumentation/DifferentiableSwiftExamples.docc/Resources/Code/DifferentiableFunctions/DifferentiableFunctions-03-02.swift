@@ -1,5 +1,5 @@
-import _Differentiation
 import Foundation
+import _Differentiation
 
 @derivative(of: min)
 public func minVJP<T: Comparable & Differentiable>(
