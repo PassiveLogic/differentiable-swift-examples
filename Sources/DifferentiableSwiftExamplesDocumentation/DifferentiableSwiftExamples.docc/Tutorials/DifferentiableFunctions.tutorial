@@ -1,16 +1,16 @@
-@Tutorial(time: 5) {
-    @Intro(title: "Basic Differentiation") {
-        # First tutorial Skeleton, more coming soon
+@Tutorial(time: 15) {
+    @Intro(title: "Differentiable functions") {
+        This tutorial explores the ways that you can create, use, and customize differentiable Swift functions.
     }
     
     @Section(title: "Marking functions as differentiable") {
         @ContentAndMedia {
-            How to mark functions as differentiable and get their derivative and/or gradient.
+            Add the `@differentiable` attribute to a function and obtain its derivative.
         }
         
         @Steps {            
             @Step {
-                Start by importing the `_Differentiation` module.
+                Start by importing the `_Differentiation` module. Differentiable Swift is an experimental language feature, and is activated only for files that import this module.
                 @Code(name: "main.swift", file: "DifferentiableFunctions-01-01.swift")
             }
             
@@ -22,35 +22,85 @@
             }
             
             @Step {
-                Mark the function with `@differentiable(reverse)`
+                Mark the function with `@differentiable(reverse)` to indicate that we want it to be used for reverse-mode differentiation.
                 @Code(name: "main.swift", file: "DifferentiableFunctions-01-03.swift")
             }
             
-            Note that all inputs and outputs of a function marked with `@differentiable` should conform to the `Differentiable` protocol. Luckily floating point numbers like `Float` and `Double` already conform to this protocol by default.
+            Note that all arguments and results of a `@differentiable` function should have types conforming to the `Differentiable` protocol.
+            Such types are generally continuous, such as `Float` and `Double`, which are among the standard library types conforming to `Differentiable`.
             
-            # More Coming Soon
+            @Step {
+                The compiler will automatically generate the reverse-mode derivative (pullback) of a `@differentiable(reverse)` function. We can access that automatically-generated pullback via one of several built-in functions.
+                @Code(name: "main.swift", file: "DifferentiableFunctions-01-04.swift")
+            }
+
+            @Step {
+                Printing the computed value and gradient returns the result of the function and its derivative, as expected.
+                @Code(name: "main.swift", file: "DifferentiableFunctions-01-05.swift")
+            }
         }
     }
     
-    @Section(title: "Writing custom derivatives") {
+    @Section(title: "Defining custom derivatives") {
         @ContentAndMedia {
-            How to mark functions as differentiable and get their derivative and/or gradient.
+            Add a custom derivative to a Swift function.
+            
+            Functions with differentiable arguments and results can have automatically generated derivatives provided by the compiler.
+            However, sometimes you may want to provide your own custom derivatives to override this machinery.
         }
         
         @Steps {
             @Step {
+                We'll start with a function that squares a number. 
                 @Code(name: "main.swift", file: "DifferentiableFunctions-02-01.swift")
+            }
+
+            @Step {
+                Normally, we would use the `@differentiable(reverse)` attribute to let the compiler build a derivative of this function. Instead, we'll register a custom derivative to be associated with this function. 
+                @Code(name: "main.swift", file: "DifferentiableFunctions-02-02.swift")
+            }
+            
+            Note: the `vjp` prefix used here stands for vector-Jacobian product.
+            
+            @Step {
+                The function signature of this custom derivative has a particular shape. It returns a tuple, with the first element being the value that would normally be returned from the base function, and the second a pullback closure.
+                @Code(name: "main.swift", file: "DifferentiableFunctions-02-03.swift")
+            }
+
+            @Step {
+                Differentiable types have an associated `TangentVector` type that is used in derivatives. In the case of a simple type like `Double`, it is its own `TangentVector` so we can simplify this.
+                @Code(name: "main.swift", file: "DifferentiableFunctions-02-04.swift")
+            }
+
+            @Step {
+                Finally, we define the body of the custom derivative by calculating the normal result of the function and then constructing the pullback function.
+                @Code(name: "main.swift", file: "DifferentiableFunctions-02-05.swift")
             }
         }
     }
         
-    @Section(title: "Make 3rd party functions differentiable") {
+    @Section(title: "Making external functions differentiable") {
         @ContentAndMedia {
-            How to mark functions as differentiable and get their derivative and/or gradient.
+            Register a manual derivative with a system function to make it differentiable.
+            
+            The Swift compiler can automatically generate derivatives for Swift functions within a module, but non-Swift functions or Swift functions defined in an external module and not marked with `@differentiable` will not have automatic derivatives. To make those functions differentiable, you need to register your own derivatives for them.
         }
         
         @Steps {
-            # Coming Soon
+            @Step {
+                If we try to access the derivative of an external function, we may get an error that it is not differentiable.
+                @Code(name: "main.swift", file: "DifferentiableFunctions-03-01.swift")
+            }
+
+            @Step {
+                In this case, `min()` has not been marked as `@differentiable` and thus has no automatically-provided derivative. Even though the function definition exists outside of this module, we can register our own derivative for it.
+                @Code(name: "main.swift", file: "DifferentiableFunctions-03-02.swift")
+            }
+
+            @Step {
+                By doing so, the function is now differentiable and can participate in the rest of the differentiable Swift machinery.
+                @Code(name: "main.swift", file: "DifferentiableFunctions-03-03.swift")
+            }
         }
     }
 }

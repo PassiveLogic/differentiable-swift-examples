@@ -1,9 +1,75 @@
 @Tutorial(time: 20) {
-    @Intro(title: "Gradient Descent") {
-        # Coming Soon
+    @Intro(title: "Gradient descent") {
+        Gradient descent optimization is a powerful technique for optimizing arbitrary parameters in a complex system to arrive at a desired result.
+        
+        This tutorial will demonstrate the use of gradient descent to train a perceptron to perform a boolean logic function.
     }
     
-    @Section(title: "Coming Soon") {
-        
+    @Section(title: "Training a perceptron") {
+        @ContentAndMedia {
+            Train a basic perceptron to mimic an AND gate.
+            
+            A perceptron is a simple, single-level neural network. In this case, we'll build one with two neurons, one for each input in the AND gate. The neurons will have trainable weights and a bias value, along with a nonlinear activation function.
+            
+            This perceptron will be trained against the desired behavior of an AND gate, and weights for the neurons will be optimized via gradient descent.
+        }
+        @Steps {
+            @Step {
+                Differentiable Swift is an experimental language feature. To begin with, we must enable it by importing the `_Differentiation` module.
+                @Code(name: "main.swift", file: "GradientDescent-01-01.swift")
+            }
+            @Step {
+                Let's create the perceptron as a custom data type. The weights for the connections between neurons will be randomly-initialized floating point values, and the bias will start at zero.
+                @Code(name: "main.swift", file: "GradientDescent-01-02.swift")
+            }
+            @Step {
+                Because all of the properties of our perceptron conform to `Differentiable`, it's easy to make the perceptron itself differentiable by adding the conformance to `Differentiable`.
+                @Code(name: "main.swift", file: "GradientDescent-01-03.swift")
+            }
+            @Step {
+                A convenient language feature that was introduced to Swift is the ability of structs to be called as if they were functions. To do so, you need to define a `callAsFunction()` method on the struct.
+                @Code(name: "main.swift", file: "GradientDescent-01-04.swift")
+            }
+            @Step {
+                Within the body of that function, we'll define how our perceptron model works. As a first step, we'll calculate the activation strength from the inbound activation of each neuron, multiplied by the respective connection weights. The bias is added to the result.
+                @Code(name: "main.swift", file: "GradientDescent-01-05.swift")
+            }
+            @Step {
+                To determine how strongly the outbound connection "fires", we'll apply a nonlinear function to it. In this case, if it is positive pass through the resulting value. If negative, only pass along a small fraction of the value.
+                @Code(name: "main.swift", file: "GradientDescent-01-06.swift")
+            }
+            @Step {
+                The goal is to train this perceptron to behave like an AND gate, so that will be set up as our target.
+                @Code(name: "main.swift", file: "GradientDescent-01-07.swift")
+            }
+            @Step {
+                To optimize the parameters of the perceptron, we'll set up a loss function that represents how closely our perceptron matches the targe behavior. In this case, the lower the loss, the closer the perceptron models an AND gate.
+                @Code(name: "main.swift", file: "GradientDescent-01-08.swift")
+            }
+            @Step {
+                To start the training process, a new perceptron is initialized.
+                @Code(name: "main.swift", file: "GradientDescent-01-09.swift")
+            }
+            @Step {
+                We'll train this perceptron for 100 steps in a loop.
+                @Code(name: "main.swift", file: "GradientDescent-01-10.swift")
+            }
+            @Step {
+                The first part of a training step is to both obtain the current loss value of the perceptron when compared to our AND gate, along with a pullback closure.
+                @Code(name: "main.swift", file: "GradientDescent-01-11.swift")
+            }
+            @Step {
+                From the pullback closure, we'll determine how to modify the parameters of the perceptron by taking a small step in a direction that should reduce the loss value. The result of calling the pullback is a tangent vector for the perceptron, a type that reflects the rate of change of the perceptron's parameters.
+                
+                The function `.move(by:)` is provided by the `Differentiable` protocol and causes all of the perceptron's parameters to be adjusted by the tangent vector.
+                @Code(name: "main.swift", file: "GradientDescent-01-12.swift")
+            }
+            @Step {
+                This stepwise training of a model by continually nudging it in a desired direction is the powerful technique of gradient descent optimization in action.
+                
+                At the end of this process, we should have a perceptron that roughly approximates the functioning of an AND gate.
+                @Code(name: "main.swift", file: "GradientDescent-01-13.swift")
+            }
+        }
     }
 }

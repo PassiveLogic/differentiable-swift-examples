@@ -1,0 +1,71 @@
+@Tutorial(time: 15) {
+    @Intro(title: "Differentiable types") {
+        `@differentiable` functions require that their arguments and results conform to the `Differentiable` protocol. Some of the standard library types such as `Float`, `Double`, and `Array` already conform to this protocol. 
+        
+        In this tutorial we will go into writing our own `Differentiable` types for use with more complex `@differentiable` functions.
+    }
+    
+    @Section(title: "Conforming types to `Differentiable`") {
+        @ContentAndMedia {
+            Conform custom types to `Differentiable`,  and use them as arguments to `@differentiable` functions.
+            
+            Differentiable functions must have at least one argument and one result each that conform to the `Differentiable`. Many continuous types present in the standard library, like `Float` or `Double`, conform to `Differentiable`. For you to use your own custom types as active arguments or results in differentiable functions, they must conform to `Differentiable`.
+        }
+        
+        @Steps {
+            @Step {
+                Differentiable Swift is an experimental language feature. To enable it for a file, you must first import the `_Differentiation` module.
+                @Code(name: "main.swift", file: "DifferentiableTypes-01-01.swift")
+            }
+            
+            @Step {
+                Custom types that only contain other `Differentiable`-conforming members are easy to make `Differentiable` themselves.
+                @Code(name: "main.swift", file: "DifferentiableTypes-01-02.swift")
+            }
+
+            @Step {
+                To do so, simply add a `Differentiable` conformance when they are defined.
+                @Code(name: "main.swift", file: "DifferentiableTypes-01-03.swift")
+            }
+
+            @Step {
+                A custom type can have non-`Differentiable` members.
+                @Code(name: "main.swift", file: "DifferentiableTypes-01-04.swift")
+            }
+
+            @Step {
+                In that case, annotate those members with the `@noDerivative` attribute.
+                @Code(name: "main.swift", file: "DifferentiableTypes-01-05.swift")
+            }            
+        }
+    }
+    
+    @Section(title: "Defining custom tangent vectors for types") {
+        @ContentAndMedia {
+            Define a custom tangent vector for a type.
+            
+            Every differentiable type has a `TangentVector` associated with it, which represents the rate of change of that type when used in a derivative.
+            The compiler normally synthesizes these tangent vectors for you on types conforming to `Differentiable`.
+            
+            However, there are situations in which you may want to define a custom tangent vector for a type.
+            For example, `Array` doesn't conform to `AdditiveArithmetic`, and therefore can't have a tangent vector automatically synthesized.
+        }
+        
+        @Steps {
+            @Step {
+                We begin with a simple differentiable type.
+                @Code(name: "main.swift", file: "DifferentiableTypes-02-01.swift")
+            }
+
+            @Step {
+                A custom tangent vector must either be a subtype named `TangentVector` or aliased to that name. It can contain a custom internal structure, but must conform to `AdditiveArithmetic` and `Differentiable`.
+                @Code(name: "main.swift", file: "DifferentiableTypes-02-02.swift")
+            }
+
+            @Step {
+                Finally, a `move(by:)` function must be defined that moves an instance of the base type by a small step along a direction. If the `TangentVector` you are stepping by is composed of other types' `TangentVector`s, you can use those existing `move(by:)` functions within this new one.
+                @Code(name: "main.swift", file: "DifferentiableTypes-02-03.swift")
+            }
+        }
+    }
+}

@@ -1,9 +1,0 @@
-@Tutorial(time: 5) {
-    @Intro(title: "Setup") {
-        # Coming Soon
-    }
-    
-    @Section(title: "Coming Soon") {
-        
-    }
-}
