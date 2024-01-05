@@ -43,7 +43,7 @@
                 @Code(name: "main.swift", file: "GradientDescent-01-07.swift")
             }
             @Step {
-                To optimize the parameters of the perceptron, we'll set up a loss function that represents how closely our perceptron matches the targe behavior. In this case, the lower the loss, the closer the perceptron models an AND gate.
+                To optimize the parameters of the perceptron, we'll set up a loss function that represents how closely our perceptron matches the target behavior. In this case, the lower the loss, the closer the perceptron models an AND gate.
                 @Code(name: "main.swift", file: "GradientDescent-01-08.swift")
             }
             @Step {
