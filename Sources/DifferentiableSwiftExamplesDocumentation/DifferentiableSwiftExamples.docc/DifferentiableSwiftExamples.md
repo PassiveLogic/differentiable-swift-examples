@@ -15,6 +15,7 @@ TODO: A good introduction story here soon.
 
 ### Articles
 
+- <doc:Setup>
 - <doc:BasicDifferentiation>
 - <doc:CustomDerivatives>
 - <doc:ManuallyDefinedTangentVectors>
