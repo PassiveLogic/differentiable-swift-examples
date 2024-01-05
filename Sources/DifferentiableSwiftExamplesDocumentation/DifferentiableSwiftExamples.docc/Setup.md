@@ -11,6 +11,7 @@ After a toolchain has been installed there are a few things to take into conside
 ### Installing a toolchain
 
 Toolchains can be manually downloaded and installed from [swift.org](https://swift.org/download). If you do so make sure to select a development snapshot and not a stable release since Differentiable Swift is dissabled on the stable branches. 
+
 When working with different toolchain versions across different projects we suggest using either of the following tools to manage your toolchains:
 
 - [swiftenv](https://github.com/kylef/swiftenv) available for macOS and Linux
@@ -26,6 +27,7 @@ swift run
 On macOS, when running code directly from Xcode the IDE handles all toolchain specific configuration for you.
 
 However when compiling Differentiable Swift code on macOS from terminal keep in mind that due to using a custom toolchain we have to set the following variables to make sure our custom toolchain uses the right sdk and runtime:
+
 ```bash
 export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.sdk
 ```
