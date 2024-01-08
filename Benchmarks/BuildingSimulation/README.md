@@ -37,8 +37,6 @@ Nightly toolchain snapshots tend to have better performance, due to new optimiza
 architectural improvements constantly being upstreamed. More information on toolchain installation 
 and management can be found [here](https://passivelogic.github.io/differentiable-swift-examples/documentation/differentiableswiftexamples/setup).
 
-To build the benchmark, change into the `Swift` subdirectory and run the following:
-
 When using a recent Swift.org nightly toolchain snapshot on macOS, you may need to set the following environment variables to point to the correct macOS SDK and Swift runtime:
 ```bash
 export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.sdk
@@ -47,7 +45,7 @@ export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platf
 export DYLD_LIBRARY_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2023-11-20-a.xctoolchain/usr/lib/swift/macosx
 ```
 
-Then we can compile our benchmark with the following command (both macOS and Linux)
+To build the benchmark, change into the `Swift` subdirectory and run the following:
 ```bash
 swiftc -O main.swift -o SwiftBenchmark
 ```
