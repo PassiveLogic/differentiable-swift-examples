@@ -34,16 +34,23 @@ Ubuntu 20.04, but may require slight modification for other platforms.
 A Swift toolchain with support for differentiation must be installed and in your current path. We 
 recommend using one [downloaded from Swift.org](https://www.swift.org/download/) for your platform. 
 Nightly toolchain snapshots tend to have better performance, due to new optimizations and 
-architectural improvements constantly being upstreamed.
+architectural improvements constantly being upstreamed. More information on toolchain installation 
+and management can be found [here](https://passivelogic.github.io/differentiable-swift-examples/documentation/differentiableswiftexamples/setup).
+
+When using a recent Swift.org nightly toolchain snapshot on macOS, you may need to set the following environment variables to point to the correct macOS SDK and Swift runtime:
+```bash
+export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.sdk
+```
+```bash
+export DYLD_LIBRARY_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2023-11-20-a.xctoolchain/usr/lib/swift/macosx
+```
 
 To build the benchmark, change into the `Swift` subdirectory and run the following:
-
 ```bash
 swiftc -O main.swift -o SwiftBenchmark
 ```
 
 and then run it via:
-
 ```bash
 ./SwiftBenchmark 
 ```
