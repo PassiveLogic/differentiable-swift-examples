@@ -39,7 +39,7 @@ and management can be found [here](https://passivelogic.github.io/differentiable
 
 To build the benchmark, change into the `Swift` subdirectory and run the following:
 
-When on macOS export the following variables to make sure our custom toolchain uses the right sdk and runtime:
+When using a recent Swift.org nightly toolchain snapshot on macOS, you may need to set the following environment variables to point to the correct macOS SDK and Swift runtime:
 ```bash
 export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.sdk
 ```
