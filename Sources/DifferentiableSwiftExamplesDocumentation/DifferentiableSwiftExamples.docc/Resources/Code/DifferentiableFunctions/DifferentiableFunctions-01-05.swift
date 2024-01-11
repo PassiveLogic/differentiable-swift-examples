@@ -5,7 +5,7 @@ func squared(_ input: Double) -> Double {
     input * input
 }
 
-let (value, gradient) = valueWithGradient(at: 3.0, of: square)
+let (value, gradient) = valueWithGradient(at: 3.0, of: squared)
 print("The value is \(value), and the gradient is \(gradient).")
 
 // The value is 9.0, and the gradient is 6.0.
