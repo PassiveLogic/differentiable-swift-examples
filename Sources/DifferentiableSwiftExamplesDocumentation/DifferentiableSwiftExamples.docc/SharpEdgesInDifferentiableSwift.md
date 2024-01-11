@@ -1,6 +1,6 @@
 # Sharp edges in differentiable Swift
 
-This is an overview of some of the currently missing capabilities in differentiable Swift.
+An overview of some of the currently missing capabilities in differentiable Swift.
 
 ## Overview
 
