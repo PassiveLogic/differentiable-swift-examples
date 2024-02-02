@@ -16,15 +16,15 @@ Nightly toolchain snapshots tend to have better performance, due to new optimiza
 architectural improvements constantly being upstreamed. More information on toolchain installation 
 and management can be found [here](https://passivelogic.github.io/differentiable-swift-examples/documentation/differentiableswiftexamples/setup).
 
-When using a recent Swift.org nightly toolchain snapshot on macOS, you may need to set the following environment variables to point to the correct macOS SDK and Swift runtime:
-```bash
-export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.sdk
-```
-```bash
-export DYLD_LIBRARY_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2023-11-20-a.xctoolchain/usr/lib/swift/macosx
-```
-
 Build and run the benchmark via the following:
 ```bash
-swift run -c release LanguageCoverageBenchmark
+swift package benchmark
 ```
+
+When using a recent Swift.org nightly toolchain snapshot on macOS, you may run into segfault issues when running from terminal. This is due to the executable using the system runtime instead of the toolchain provided one. 
+It is also possible to run the benchmarks from Xcode ([more info here](https://swiftpackageindex.com/ordo-one/package-benchmark/1.22.1/documentation/benchmark/runningbenchmarks#Running-benchmarks-in-Xcode-and-using-Instruments-for-profiling-benchmarks)). 
+Make sure Xcode is closed and run the following to open Xcode with jemalloc disabled :
+```bash
+open --env BENCHMARK_DISABLE_JEMALLOC=true Package.swift
+```
+Set the executable's scheme to release mode and run the executable by pressing `Cmd+R`.
