@@ -1,24 +1,28 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
     name: "LanguageCoverageBenchmark",
     platforms: [
-        .macOS(.v10_13)
+        .macOS(.v13)
     ],
     products: [
-        .executable(name: "LanguageCoverageBenchmark", targets: ["LanguageCoverageBenchmark"])
+        .executable(name: "LanguageCoverageBenchmarks", targets: ["LanguageCoverageBenchmarks"])
     ],
     dependencies: [
-        .package(
-            name: "Benchmark",
-            url: "https://github.com/google/swift-benchmark",
-            .branch("main"))
+        .package(url: "https://github.com/ordo-one/package-benchmark", from: "1.22.1"),
     ],
     targets: [
-        .target(
-            name: "LanguageCoverageBenchmark",
-            dependencies: ["Benchmark"])
+        .executableTarget(
+            name: "LanguageCoverageBenchmarks",
+            dependencies: [
+                .product(name: "Benchmark", package: "package-benchmark"),
+            ],
+            path: "Benchmarks/LanguageCoverageBenchmarks",
+            plugins: [
+                .plugin(name: "BenchmarkPlugin", package: "package-benchmark"),
+            ]
+        )
     ]
 )
