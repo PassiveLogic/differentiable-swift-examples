@@ -162,7 +162,7 @@ def measure(function, arguments):
     start = time.time()
     result = function(arguments)
     end = time.time()
-    return end - start
+    return (end - start, result)
 
 
 def fullPipe(simParams):
@@ -180,18 +180,19 @@ warmup = 3
 
 for i in range(trials):
     
-    forwardOnly = measure(fullPipe, SimParamsConstant)
+    inputs = SimParamsConstant
+    forwardOnlyTime, forwardOutput = measure(fullPipe, inputs)
     
     simParams = SimParamsConstant
     def getGradient(simParams):
-        endTemperature, gradient = torch.autograd.functional.vjp(simulate, SimParamsConstant)
+        gradient = torch.autograd.grad(forwardOutput, inputs)
         return gradient
 
 
-    gradientTime = measure(getGradient, simParams)
+    gradientTime, gradient = measure(getGradient, simParams)
     
     if i >= warmup:
-        totalForwardTime += forwardOnly
+        totalForwardTime += forwardOnlyTime
         totalGradientTime += gradientTime
 
 
