@@ -211,7 +211,7 @@ def measure(function, arguments):
     start = time.time()
     result = function(arguments)
     end = time.time()
-    return end - start
+    return (end - start, result)
 
 
 @tf.function
@@ -230,7 +230,7 @@ warmup = 3
 
 for i in range(trials + warmup):
     
-    forwardOnly = measure(fullPipe, SimParamsConstant)
+    forwardTime, forwardOutput = measure(fullPipe, SimParamsConstant)
     
     simParams = tf.Variable(SimParamsConstant)
     def getGradient(simParams):
@@ -241,10 +241,10 @@ for i in range(trials + warmup):
         return gradient
 
 
-    gradientTime = measure(getGradient, simParams)
-    
+    gradientTime, gradient = measure(getGradient, simParams)
+
     if i >= warmup:
-        totalForwardTime += forwardOnly
+        totalForwardTime += forwardTime
         totalGradientTime += gradientTime
 
 

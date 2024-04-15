@@ -178,7 +178,7 @@ func simulate(simParams: SimParams) -> Float {
     var quanta = simParams.quanta
 
     slab.temp = simParams.startingTemp
-    for i in 0 ..< timesteps {
+    for _ in 0 ..< timesteps {
         let tankAndQuanta = updateSourceTank(store: tank, quanta: quanta)
         tank = tankAndQuanta.tank
         quanta = tankAndQuanta.quanta
@@ -201,12 +201,12 @@ func dontLetTheCompilerOptimizeThisAway<T>(_ x: T) {
     blackHole = x
 }
 
-func measure(_ block: () throws -> Void) -> Double {
+func measure<T>(_ block: () throws -> T) throws -> (time: Double, result: T) {
     let t0 = DispatchTime.now()
-    try! block()
+    let result = try block()
     let t1 = DispatchTime.now()
     let elapsed = Double(t1.uptimeNanoseconds - t0.uptimeNanoseconds) / 1E9
-    return elapsed
+    return (elapsed, result)
 }
 
 @differentiable(reverse)
@@ -222,15 +222,16 @@ var totalPureForwardTime: Double = 0
 var totalGradientTime: Double = 0
 
 for _ in 0 ..< trials {
-    let forwardOnly = measure {
-        let output = fullPipe(simParams: simParams)
-        dontLetTheCompilerOptimizeThisAway(output)
+    let (forwardOnly, _) = try measure {
+        return fullPipe(simParams: simParams)
     }
+    dontLetTheCompilerOptimizeThisAway(forwardOnly)
 
-    var grad: SimParams.TangentVector?
+    let (gradientTime, grad) = try measure {
+        return gradient(at: simParams, of: fullPipe)
+    }
+    dontLetTheCompilerOptimizeThisAway(grad)
 
-    let gradientTime = measure {
-        grad = gradient(at: simParams, of: fullPipe)
     }
 
     totalPureForwardTime += forwardOnly

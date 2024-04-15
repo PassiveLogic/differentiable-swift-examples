@@ -181,7 +181,7 @@ warmup = 3
 for i in range(trials):
     
     inputs = SimParamsConstant
-    forwardOnlyTime, forwardOutput = measure(fullPipe, inputs)
+    forwardTime, forwardOutput = measure(fullPipe, inputs)
     
     simParams = SimParamsConstant
     def getGradient(simParams):
@@ -192,7 +192,7 @@ for i in range(trials):
     gradientTime, gradient = measure(getGradient, simParams)
     
     if i >= warmup:
-        totalForwardTime += forwardOnlyTime
+        totalForwardTime += forwardTime
         totalGradientTime += gradientTime
 
 

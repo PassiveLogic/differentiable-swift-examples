@@ -9,3 +9,4 @@ DerivedData
 .build/
 .swift-version
 *.swp
+main
