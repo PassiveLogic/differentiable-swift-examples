@@ -65,25 +65,6 @@ struct QuantaAndPower: Differentiable {
     var power: Float
 }
 
-func QuantaAndPowerTangentOnes() -> QuantaAndPower.TangentVector {
-    return QuantaAndPower.TangentVector(quanta: QuantaTypeTangentOnes(), power: 1)
-}
-
-func QuantaTypeTangentOnes() -> QuantaType.TangentVector {
-    return QuantaType.TangentVector(power: 1, temp: 1, flow: 1, density: 1, Cp: 1)
-}
-
-func SlabTypeTangentOnes() -> SlabType.TangentVector {
-    return SlabType.TangentVector(temp: 1, area: 1, Cp: 1, density: 1, thickness: 1)
-}
-
-func TankTangentOnes() -> TankType.TangentVector {
-    return TankType.TangentVector(temp: 1, volume: 1, Cp: 1, density: 1, mass: 1)
-}
-
-func TankAndQuantaOnes() -> TankAndQuanta.TangentVector {
-    return TankAndQuanta.TangentVector(tank: TankTangentOnes(), quanta: QuantaTypeTangentOnes())
-}
 
 extension Differentiable {
     /// Applies the given closure to the derivative of `self`.
