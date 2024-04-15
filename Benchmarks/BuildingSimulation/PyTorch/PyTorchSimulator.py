@@ -177,6 +177,7 @@ totalGradientTime = 0
 timesteps = 20
 trials = 30
 warmup = 3
+printGradToCompare = False
 
 for i in range(trials):
     
@@ -190,6 +191,9 @@ for i in range(trials):
 
 
     gradientTime, gradient = measure(getGradient, simParams)
+
+    if printGradToCompare:
+        print(gradient)
     
     if i >= warmup:
         totalForwardTime += forwardTime

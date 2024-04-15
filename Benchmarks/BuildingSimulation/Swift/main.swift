@@ -220,6 +220,7 @@ var trials = 30
 var timesteps = 20
 var totalPureForwardTime: Double = 0
 var totalGradientTime: Double = 0
+let printGradToCompare = false
 
 for _ in 0 ..< trials {
     let (forwardOnly, _) = try measure {
@@ -232,6 +233,8 @@ for _ in 0 ..< trials {
     }
     dontLetTheCompilerOptimizeThisAway(grad)
 
+    if printGradToCompare {
+        print(grad)
     }
 
     totalPureForwardTime += forwardOnly
