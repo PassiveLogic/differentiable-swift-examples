@@ -178,7 +178,7 @@ func simulate(simParams: SimParams) -> Float {
     var quanta = simParams.quanta
 
     slab.temp = simParams.startingTemp
-    for i in 1 ... 20 {
+    for i in 0 ..< timesteps {
         let tankAndQuanta = updateSourceTank(store: tank, quanta: quanta)
         tank = tankAndQuanta.tank
         quanta = tankAndQuanta.quanta
@@ -218,6 +218,7 @@ func fullPipe(simParams: SimParams) -> Float {
 
 var learningRate: Float = 0.1
 var trials = 30
+var timesteps = 20
 var totalPureForwardTime: Double = 0
 var totalGradientTime: Double = 0
 
@@ -240,5 +241,6 @@ for _ in 0 ..< trials {
 let averagePureForward = totalPureForwardTime / Double(trials)
 let averageGradient = totalGradientTime / Double(trials)
 
+print("timesteps:", timesteps)
 print("trials:", trials)
 print("average forward and back (gradient) time:", averageGradient)

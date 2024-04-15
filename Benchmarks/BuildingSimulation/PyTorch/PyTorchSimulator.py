@@ -140,7 +140,7 @@ def simulate(simParams):
     startingTemp = simParams[SimParamsIndices.istartingTemp][0]
     slab = slab * torch.Tensor([0.0, 1, 1, 1, 1]) + startingTemp * torch.Tensor([1.0, 0, 0, 0, 0])
 
-    for i in range(1, 21):
+    for i in range(0, timesteps):
         tankAndQuanta = updateSourceTank(tank, quanta)
         tank = tankAndQuanta[0]
         quanta = tankAndQuanta[1]
@@ -175,6 +175,7 @@ learningRate = 0.1
 totalForwardTime = 0
 totalGradientTime = 0
 
+timesteps = 20
 trials = 30
 warmup = 3
 
@@ -198,5 +199,7 @@ for i in range(trials):
 
 averageForwardTime = totalForwardTime / (trials - warmup)
 averageGradientTime = totalGradientTime / (trials - warmup)
+
+print("timesteps:", timesteps)
 print("trials:", trials)
 print("average forward and backwards pass (gradient) time", averageGradientTime)
