@@ -216,7 +216,6 @@ func fullPipe(simParams: SimParams) -> Float {
     return loss
 }
 
-var learningRate: Float = 0.1
 var trials = 30
 var timesteps = 20
 var totalPureForwardTime: Double = 0

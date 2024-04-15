@@ -220,7 +220,6 @@ def fullPipe(simParams):
     loss = lossCalc(pred, 27.344767)
     return loss
 
-learningRate = 0.1
 
 totalForwardTime = 0
 totalGradientTime = 0
