@@ -65,25 +65,6 @@ struct QuantaAndPower: Differentiable {
     var power: Float
 }
 
-func QuantaAndPowerTangentOnes() -> QuantaAndPower.TangentVector {
-    return QuantaAndPower.TangentVector(quanta: QuantaTypeTangentOnes(), power: 1)
-}
-
-func QuantaTypeTangentOnes() -> QuantaType.TangentVector {
-    return QuantaType.TangentVector(power: 1, temp: 1, flow: 1, density: 1, Cp: 1)
-}
-
-func SlabTypeTangentOnes() -> SlabType.TangentVector {
-    return SlabType.TangentVector(temp: 1, area: 1, Cp: 1, density: 1, thickness: 1)
-}
-
-func TankTangentOnes() -> TankType.TangentVector {
-    return TankType.TangentVector(temp: 1, volume: 1, Cp: 1, density: 1, mass: 1)
-}
-
-func TankAndQuantaOnes() -> TankAndQuanta.TangentVector {
-    return TankAndQuanta.TangentVector(tank: TankTangentOnes(), quanta: QuantaTypeTangentOnes())
-}
 
 extension Differentiable {
     /// Applies the given closure to the derivative of `self`.
@@ -197,7 +178,7 @@ func simulate(simParams: SimParams) -> Float {
     var quanta = simParams.quanta
 
     slab.temp = simParams.startingTemp
-    for i in 1 ... 20 {
+    for _ in 0 ..< timesteps {
         let tankAndQuanta = updateSourceTank(store: tank, quanta: quanta)
         tank = tankAndQuanta.tank
         quanta = tankAndQuanta.quanta
@@ -220,12 +201,12 @@ func dontLetTheCompilerOptimizeThisAway<T>(_ x: T) {
     blackHole = x
 }
 
-func measure(_ block: () throws -> Void) -> Double {
+func measure<T>(_ block: () throws -> T) throws -> (time: Double, result: T) {
     let t0 = DispatchTime.now()
-    try! block()
+    let result = try block()
     let t1 = DispatchTime.now()
     let elapsed = Double(t1.uptimeNanoseconds - t0.uptimeNanoseconds) / 1E9
-    return elapsed
+    return (elapsed, result)
 }
 
 @differentiable(reverse)
@@ -235,21 +216,25 @@ func fullPipe(simParams: SimParams) -> Float {
     return loss
 }
 
-var learningRate: Float = 0.1
 var trials = 30
+var timesteps = 20
 var totalPureForwardTime: Double = 0
 var totalGradientTime: Double = 0
+let printGradToCompare = false
 
 for _ in 0 ..< trials {
-    let forwardOnly = measure {
-        let output = fullPipe(simParams: simParams)
-        dontLetTheCompilerOptimizeThisAway(output)
+    let (forwardOnly, _) = try measure {
+        return fullPipe(simParams: simParams)
     }
+    dontLetTheCompilerOptimizeThisAway(forwardOnly)
 
-    var grad: SimParams.TangentVector?
+    let (gradientTime, grad) = try measure {
+        return gradient(at: simParams, of: fullPipe)
+    }
+    dontLetTheCompilerOptimizeThisAway(grad)
 
-    let gradientTime = measure {
-        grad = gradient(at: simParams, of: fullPipe)
+    if printGradToCompare {
+        print(grad)
     }
 
     totalPureForwardTime += forwardOnly
@@ -259,5 +244,6 @@ for _ in 0 ..< trials {
 let averagePureForward = totalPureForwardTime / Double(trials)
 let averageGradient = totalGradientTime / Double(trials)
 
+print("timesteps:", timesteps)
 print("trials:", trials)
 print("average forward and back (gradient) time:", averageGradient)

@@ -187,7 +187,7 @@ def simulate(simParams):
     startingTemp = simParams[SimParamsIndices.istartingTemp][0]
     slab = slab * tf.constant([0.0, 1, 1, 1, 1]) + startingTemp * tf.constant([1.0, 0, 0, 0, 0])
 
-    for i in range(1, 21):
+    for i in range(0, timesteps):
         tankAndQuanta = updateSourceTank(tank, quanta)
         tank = tankAndQuanta[0]
         quanta = tankAndQuanta[1]
@@ -211,7 +211,7 @@ def measure(function, arguments):
     start = time.time()
     result = function(arguments)
     end = time.time()
-    return end - start
+    return (end - start, result)
 
 
 @tf.function
@@ -220,17 +220,18 @@ def fullPipe(simParams):
     loss = lossCalc(pred, 27.344767)
     return loss
 
-learningRate = 0.1
 
 totalForwardTime = 0
 totalGradientTime = 0
 
+timesteps = 20
 trials = 30
 warmup = 3
+printGradToCompare = False
 
 for i in range(trials + warmup):
     
-    forwardOnly = measure(fullPipe, SimParamsConstant)
+    forwardTime, forwardOutput = measure(fullPipe, SimParamsConstant)
     
     simParams = tf.Variable(SimParamsConstant)
     def getGradient(simParams):
@@ -241,14 +242,19 @@ for i in range(trials + warmup):
         return gradient
 
 
-    gradientTime = measure(getGradient, simParams)
-    
+    gradientTime, gradient = measure(getGradient, simParams)
+
+    if printGradToCompare:
+        print(gradient)
+
     if i >= warmup:
-        totalForwardTime += forwardOnly
+        totalForwardTime += forwardTime
         totalGradientTime += gradientTime
 
 
 averageForwardTime = totalForwardTime / (trials - warmup)
 averageGradientTime = totalGradientTime / (trials - warmup)
+
+print("timesteps:", timesteps)
 print("trials:", trials)
 print("average forward and backwards pass (gradient) time", averageGradientTime)

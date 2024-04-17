@@ -8,3 +8,5 @@ DerivedData
 .swiftpm/
 .build/
 .swift-version
+*.swp
+main

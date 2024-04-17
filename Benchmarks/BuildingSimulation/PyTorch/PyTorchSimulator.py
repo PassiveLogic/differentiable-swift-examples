@@ -140,7 +140,7 @@ def simulate(simParams):
     startingTemp = simParams[SimParamsIndices.istartingTemp][0]
     slab = slab * torch.Tensor([0.0, 1, 1, 1, 1]) + startingTemp * torch.Tensor([1.0, 0, 0, 0, 0])
 
-    for i in range(1, 21):
+    for i in range(0, timesteps):
         tankAndQuanta = updateSourceTank(tank, quanta)
         tank = tankAndQuanta[0]
         quanta = tankAndQuanta[1]
@@ -170,18 +170,19 @@ def fullPipe(simParams):
     loss = lossCalc(pred, 27.344767)
     return loss
 
-learningRate = 0.1
 
 totalForwardTime = 0
 totalGradientTime = 0
 
+timesteps = 20
 trials = 30
 warmup = 3
+printGradToCompare = False
 
 for i in range(trials):
     
     inputs = SimParamsConstant
-    forwardOnlyTime, forwardOutput = measure(fullPipe, inputs)
+    forwardTime, forwardOutput = measure(fullPipe, inputs)
     
     simParams = SimParamsConstant
     def getGradient(simParams):
@@ -190,13 +191,18 @@ for i in range(trials):
 
 
     gradientTime, gradient = measure(getGradient, simParams)
+
+    if printGradToCompare:
+        print(gradient)
     
     if i >= warmup:
-        totalForwardTime += forwardOnlyTime
+        totalForwardTime += forwardTime
         totalGradientTime += gradientTime
 
 
 averageForwardTime = totalForwardTime / (trials - warmup)
 averageGradientTime = totalGradientTime / (trials - warmup)
+
+print("timesteps:", timesteps)
 print("trials:", trials)
 print("average forward and backwards pass (gradient) time", averageGradientTime)
