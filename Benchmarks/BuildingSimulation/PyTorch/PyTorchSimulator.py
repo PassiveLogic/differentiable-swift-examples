@@ -1,10 +1,14 @@
 import torch
 
-# Definitions
-
+# Simulation parameters
+trials = 100
+timesteps = 20
+warmup = 3
 dTime = 0.1
-π = 3.14159265359
+printGradToCompare = False
 
+# Definitions
+π = 3.14159265359
 
 # TubeType and other custom object holding primitives will be represented with a 1D Tensor,
 # and SimParams will compose them into a 2D tensor
@@ -70,10 +74,10 @@ class SimParamsIndices:
 
 def computeResistance(floor, tube, quanta):
     geometry_coeff = 10.0
-    
+
     tubingSurfaceArea = (floor[SlabTypeIndices.iarea] / tube[TubeTypeIndices.itubeSpacing]) * π * tube[TubeTypeIndices.idiameter]
     resistance_abs = tube[TubeTypeIndices.iresistivity] * tube[TubeTypeIndices.ithickness] / tubingSurfaceArea
-    
+
     resistance_corrected = resistance_abs * geometry_coeff
 
     return resistance_corrected
@@ -81,7 +85,7 @@ def computeResistance(floor, tube, quanta):
 
 def computeLoadPower(floor, tube, quanta):
     resistance_abs = computeResistance(floor, tube, quanta)
-    
+
     conductance = 1/resistance_abs
     dTemp = floor[SlabTypeIndices.itemp] - quanta[QuantaIndices.itemp]
     power = dTemp * conductance
@@ -146,14 +150,14 @@ def simulate(simParams):
         quanta = tankAndQuanta[1]
 
         quanta = updateQuanta(quanta)
-        
+
         quantaAndPower = computeLoadPower(slab, pexTube, quanta)
         quanta = quantaAndPower[0]
         powerToBuilding = quantaAndPower[1]
         quanta = updateQuanta(quanta)
-        
+
         slab = updateBuildingModel(powerToBuilding, slab)
-        
+
     return slab[SlabTypeIndices.itemp]
 
 import time
@@ -174,16 +178,12 @@ def fullPipe(simParams):
 totalForwardTime = 0
 totalGradientTime = 0
 
-timesteps = 20
-trials = 30
-warmup = 3
-printGradToCompare = False
 
-for i in range(trials):
-    
+for i in range(trials + warmup):
+
     inputs = SimParamsConstant
     forwardTime, forwardOutput = measure(fullPipe, inputs)
-    
+
     simParams = SimParamsConstant
     def getGradient(simParams):
         gradient = torch.autograd.grad(forwardOutput, inputs)
@@ -194,15 +194,16 @@ for i in range(trials):
 
     if printGradToCompare:
         print(gradient)
-    
+
     if i >= warmup:
         totalForwardTime += forwardTime
         totalGradientTime += gradientTime
 
 
-averageForwardTime = totalForwardTime / (trials - warmup)
-averageGradientTime = totalGradientTime / (trials - warmup)
+averageForwardTime = totalForwardTime / trials
+averageGradientTime = totalGradientTime / trials
 
-print("timesteps:", timesteps)
 print("trials:", trials)
-print("average forward and backwards pass (gradient) time", averageGradientTime)
+print("timesteps:", timesteps)
+print(f"average forward only time: {averageForwardTime} seconds")
+print(f"average forward and backwards (gradient) time: {averageGradientTime} seconds")

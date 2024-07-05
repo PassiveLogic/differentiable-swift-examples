@@ -1,13 +1,19 @@
 
 import tensorflow as tf
 
+# Simulation parameters
+trials = 100
+timesteps = 20
+warmup = 3
+dTime = 0.1
+printGradToCompare = False
+
 @tf.function
 def doMath(a):
     return a * 2
 
 # Definitions
 
-dTime = 0.1
 π = 3.14159265359
 
 
@@ -74,10 +80,10 @@ class SimParamsIndices:
 @tf.function
 def computeResistance(floor, tube, quanta):
     geometry_coeff = 10.0
-    
+
     tubingSurfaceArea = (floor[SlabTypeIndices.iarea] / tube[TubeTypeIndices.itubeSpacing]) * π * tube[TubeTypeIndices.idiameter]
     resistance_abs = tube[TubeTypeIndices.iresistivity] * tube[TubeTypeIndices.ithickness] / tubingSurfaceArea
-    
+
     resistance_corrected = resistance_abs * geometry_coeff
 
     return resistance_corrected
@@ -86,7 +92,7 @@ def computeResistance(floor, tube, quanta):
 @tf.function
 def computeLoadPower(floor, tube, quanta):
     resistance_abs = computeResistance(floor, tube, quanta)
-    
+
     conductance = 1/resistance_abs
     dTemp = floor[SlabTypeIndices.itemp] - quanta[QuantaIndices.itemp]
     power = dTemp * conductance
@@ -193,14 +199,14 @@ def simulate(simParams):
         quanta = tankAndQuanta[1]
 
         quanta = updateQuanta(quanta)
-        
+
         quantaAndPower = computeLoadPower(slab, pexTube, quanta)
         quanta = quantaAndPower[0]
         powerToBuilding = quantaAndPower[1]
         quanta = updateQuanta(quanta)
-        
+
         slab = updateBuildingModel(powerToBuilding, slab)
-        
+
     return slab[SlabTypeIndices.itemp]
 
 
@@ -224,15 +230,10 @@ def fullPipe(simParams):
 totalForwardTime = 0
 totalGradientTime = 0
 
-timesteps = 20
-trials = 30
-warmup = 3
-printGradToCompare = False
-
 for i in range(trials + warmup):
-    
+
     forwardTime, forwardOutput = measure(fullPipe, SimParamsConstant)
-    
+
     simParams = tf.Variable(SimParamsConstant)
     def getGradient(simParams):
         with tf.GradientTape() as tape:
@@ -252,9 +253,10 @@ for i in range(trials + warmup):
         totalGradientTime += gradientTime
 
 
-averageForwardTime = totalForwardTime / (trials - warmup)
-averageGradientTime = totalGradientTime / (trials - warmup)
+averageForwardTime = totalForwardTime / trials
+averageGradientTime = totalGradientTime / trials
 
-print("timesteps:", timesteps)
 print("trials:", trials)
-print("average forward and backwards pass (gradient) time", averageGradientTime)
+print("timesteps:", timesteps)
+print(f"average forward only time: {averageForwardTime} seconds")
+print(f"average forward and backwards (gradient) time: {averageGradientTime} seconds")
