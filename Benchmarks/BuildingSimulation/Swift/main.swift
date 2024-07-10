@@ -1,9 +1,13 @@
 import _Differentiation
 import Foundation
 
-// Definitions
-
+// Simulation parameters
+let trials = 100
+let timesteps = 20
 let dTime: Float = 0.1
+let printGradToCompare = false
+
+// Definitions
 let π = Float.pi
 
 struct SimParams: Differentiable {
@@ -216,11 +220,8 @@ func fullPipe(simParams: SimParams) -> Float {
     return loss
 }
 
-var trials = 30
-var timesteps = 20
 var totalPureForwardTime: Double = 0
 var totalGradientTime: Double = 0
-let printGradToCompare = false
 
 for _ in 0 ..< trials {
     let (forwardOnly, _) = try measure {
@@ -244,6 +245,7 @@ for _ in 0 ..< trials {
 let averagePureForward = totalPureForwardTime / Double(trials)
 let averageGradient = totalGradientTime / Double(trials)
 
-print("timesteps:", timesteps)
-print("trials:", trials)
-print("average forward and back (gradient) time:", averageGradient)
+print("trials: \(trials)")
+print("timesteps: \(timesteps)")
+print("average forward only time: \(averagePureForward) seconds")
+print("average forward and back (gradient) time: \(averageGradient) seconds")
