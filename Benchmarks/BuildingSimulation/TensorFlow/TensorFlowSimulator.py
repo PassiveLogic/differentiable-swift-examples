@@ -227,6 +227,15 @@ def fullPipe(simParams):
     return loss
 
 
+@tf.function
+def getGradient(simParams):
+    with tf.GradientTape() as tape:
+        endTemperature = simulate(simParams)
+
+        gradient = tape.gradient(endTemperature, [simParams])
+    return gradient
+
+
 totalForwardTime = 0
 totalGradientTime = 0
 
@@ -235,13 +244,6 @@ for i in range(trials + warmup):
     forwardTime, forwardOutput = measure(fullPipe, SimParamsConstant)
 
     simParams = tf.Variable(SimParamsConstant)
-    def getGradient(simParams):
-        with tf.GradientTape() as tape:
-            endTemperature = simulate(simParams)
-
-            gradient = tape.gradient(endTemperature, [simParams])
-        return gradient
-
 
     gradientTime, gradient = measure(getGradient, simParams)
 
