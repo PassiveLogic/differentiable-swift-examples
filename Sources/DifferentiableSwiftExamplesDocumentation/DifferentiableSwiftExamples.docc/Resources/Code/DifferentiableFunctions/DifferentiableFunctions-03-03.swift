@@ -17,6 +17,6 @@ public func minVJP<T: Comparable & Differentiable>(
 }
 
 let (value, gradient) = valueWithGradient(at: 3.0, 4.0, of: min)
-print("The min() value is \(value2), and the gradient is \(gradient2).")
+print("The min() value is \(value), and the gradient is \(gradient).")
 
 // The min() value is 3.0, and the gradient is (1.0, 0.0).
