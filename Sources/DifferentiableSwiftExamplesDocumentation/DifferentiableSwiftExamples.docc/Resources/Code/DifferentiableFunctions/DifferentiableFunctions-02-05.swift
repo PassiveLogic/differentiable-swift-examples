@@ -9,9 +9,9 @@ func vjpSquared(_ input: Double) -> (
     value: Double,
     pullback: (Double) -> Double
 ) {
-    let output = squared(value)
+    let output = squared(input)
     func pullback(_ tangentVector: Double) -> Double {
-        return tangentVector * 2 * value
+        return tangentVector * 2 * input
     }
     return (value: output, pullback: pullback)
 }
