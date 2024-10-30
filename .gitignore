@@ -11,3 +11,4 @@ DerivedData
 *.swp
 main
 SwiftBenchmark
+Benchmarks/BuildingSimulation/Haskell/dist-newstyle

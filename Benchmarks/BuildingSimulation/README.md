@@ -81,6 +81,38 @@ and then run the benchmark by going to the `TensorFlow` subdirectory here and us
 python3 TensorFlowSimulator.py
 ```
 
+### Haskell
+
+For this benchmark we used the GHC Haskell compiler executing on the CPU. If you
+have a Haskell environment set up already you can jump ahead to running the
+benchmark. To set up such an environment I recommend to use the GHCup tool which
+can be found [here](https://www.haskell.org/ghcup/).
+
+Once that is installed and in your path you can either use the interactive mode
+to select and install the version you want with:
+
+```bash
+ghcup tui
+```
+
+and follow the on-screen instructions, or simply:
+
+```bash
+ghcup install ghc
+ghcup install cabal
+```
+
+and it will install the currently recommended version for you.
+
+Once you have both the compiler `ghc` and the package manager `cabal` installed,
+you can run the benchmark by going to the `Haskell` subdirectory and using the
+command:
+
+```bash
+cabal run
+```
+
+
 ## Current Results
 
 ### 2024-07-30
