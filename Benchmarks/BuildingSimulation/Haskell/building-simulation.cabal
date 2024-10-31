@@ -24,7 +24,7 @@ executable building-simulation
       -Wall
 
     build-depends:
-        base          ^>= 4.20
+        base          ^>= 4.17
       , ad            ^>= 4.5
       , criterion     ^>= 1.6
 
