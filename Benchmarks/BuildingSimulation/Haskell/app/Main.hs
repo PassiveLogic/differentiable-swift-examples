@@ -6,9 +6,13 @@
 
 module Main where
 
-import Numeric.AD.Double
-import Criterion.Main
 import Control.Monad
+import Criterion
+import Criterion.Main
+import Criterion.Types
+import Numeric.AD.Double
+import Statistics.Types
+import Text.Printf
 import Prelude hiding (init)
 
 import GHC.IsList
@@ -118,7 +122,7 @@ computeResistance
     -> Tube a
     -> Quanta a
     -> a
-computeResistance floor tube quanta =
+computeResistance floor tube _quanta =
   let geometry_coeff       = 10.0
       -- f_coff               = 0.3333333
 
@@ -294,21 +298,30 @@ timesteps :: Int
 timesteps = 1000
 
 printGradToCompare :: Bool
-printGradToCompare = True
+printGradToCompare = False
 
 main :: IO ()
 main = do
-  let params    = init :: SimParams Double
-      params'   = unpack params
-      fullPipe' = grad (fullPipe . pack)
+  let simParams  = init :: SimParams Double
+      simParams' = unpack simParams
+      fullPipe'  = grad (fullPipe . pack)
+      config     = defaultConfig { verbosity = Quiet }
 
   when printGradToCompare $
-    print (pack (fullPipe' params'))
+    print (pack (fullPipe' simParams'))
 
-  defaultMain
-    [ bench "primal"  $ nf fullPipe  params
-    , bench "adjoint" $ nf fullPipe' params'
-    ]
+  -- The default benchmarking setup will give more accurate information, but
+  -- we'll prefer to just match the output of all benchmark programs instead
+  -- defaultMain
+  --   [ bench "primal"  $ nf fullPipe  simParams
+  --   , bench "adjoint" $ nf fullPipe' simParams'
+  --   ]
+
+  result_forward  <- benchmarkWith' config $ nf fullPipe simParams
+  result_gradient <- benchmarkWith' config $ nf fullPipe' simParams'
+
+  printf "average forward only time: %f seconds\n" result_forward.reportAnalysis.anMean.estPoint
+  printf "average forward and backwards (gradient) time: %f seconds\n" result_gradient.reportAnalysis.anMean.estPoint
 
 
 -- Helpers ---------------------------------------------------------------------
