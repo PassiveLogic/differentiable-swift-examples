@@ -7,8 +7,7 @@ languages and frameworks.
 
 Differentiable Swift proves to be the best of the available solutions, and that has driven
 PassiveLogic's investment in the language feature. This directory contains a representative benchmark
-for a thermal model of a building implemented in differentiable Swift,
-[PyTorch](https://pytorch.org), and [TensorFlow](https://www.tensorflow.org).
+for a thermal model of a building implemented in differentiable Swift, [JAX](https://jax.readthedocs.io/en/latest/), [PyTorch](https://pytorch.org), and [TensorFlow](https://www.tensorflow.org).
 
 In this benchmark, the average time for a full forward + backward pass through the simulation is 
 measured across multiple trials. The lower the time, the better.
@@ -43,6 +42,24 @@ swiftc -O main.swift -o SwiftBenchmark
 and then run it via:
 ```bash
 ./SwiftBenchmark
+```
+
+### JAX
+
+For these benchmarks, we've used JAX on the CPU, running in a dedicated Python environment. If
+you have such an environment, you can activate it and jump ahead to running the benchmark. To
+set up such an environment, start in your home directory and type:
+
+```bash
+python3 -m venv jax-cpu
+source jax-cpu/bin/activate
+pip install -U jax flax
+```
+
+and then run the benchmark by going to the `JAX` subdirectory here and using:
+
+```bash
+python3 JAXSimulator.py
 ```
 
 ### PyTorch
